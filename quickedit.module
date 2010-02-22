@@ -1,0 +1,45 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Drupal hooks
+ *
+ * @author Stijn De Meyere
+ */
+ 
+/**
+ * Implementation of hook_perm().
+ */
+function quickedit_perm() {
+  return array('quick edit nodes', 'quick edit site information', 'quick edit views');
+}
+
+/**
+ * Implementation of hook_block().
+ */ 
+function quickedit_block($op = 'list', $delta = 0, $edit = array()) {
+  switch ($op) {
+    case 'list':
+      $blocks['quickedit'] = array(
+        'info' => t('Quick edit'),
+        'admin' => TRUE,
+        'cache' => FALSE
+      );
+      return $blocks;    
+    case 'view': default:
+      // If $op is "view", then we need to generate the block for display
+      // purposes. The $delta parameter tells us which block is being requested.
+      switch ($delta) {
+        case 'quickedit':
+          //quick edit node
+          if (arg(0) == 'node' && is_numeric(arg(1)) && user_access('quick edit nodes')) {
+            module_load_include('inc', 'quickedit', 'includes/quickedit.node');
+            $block['subject'] = t('Quick edit node');
+            $block['content'] = quickedit_node();
+          }
+          break;
+      }
+      return $block;
+  }
+}
