@@ -11,7 +11,7 @@
  function quickedit_node() {
    $nid = arg(1);
    $node = node_load($nid);
-   if (node_access('update', $node) {
+   if (node_access('update', $node)) {
      return drupal_get_form('quickedit_nodeoptions_form', $node);
    }
  }
