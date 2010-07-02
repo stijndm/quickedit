@@ -1,4 +1,5 @@
 ;$Id$
+package = "Administration"
 name = "Quick Edit"
 description = "A Drupal module for use with Admin 2. Allows you to edit certain settings and metadata of the current page through the toolbar."
 core = 6.x

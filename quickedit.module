@@ -24,7 +24,7 @@ function quickedit_block($op = 'list', $delta = 0, $edit = array()) {
       $blocks['quickedit'] = array(
         'info' => t('Quick edit'),
         'admin' => TRUE,
-        'cache' => FALSE
+        'cache' => BLOCK_CACHE_PER_ROLE
       );
       return $blocks;    
     case 'view': default:
